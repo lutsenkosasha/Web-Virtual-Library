@@ -1,29 +1,85 @@
-# Create T3 App
+# Web-Virtual-Library
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Описание предметной области:   
+Админка книжного интернет-магазина, которая будет предоставлять возможности просмотра каталога книг, их сортировки, фильтрации, добавления, удаления и редактирования.
 
-## What's next? How do I make an app with this?
+Стек:   
+TypeScript, React, Next.js
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+Описание страниц:   
+Страница со списком карточек книг - изображения книг с названиями   
+Страница с подробностями по конкретной книге - вся информация о данной книге   
+Страница с редактированием/добавлением информации о книге:   
+	форма для редактирования - форма с валидацией   
+	Основные поля книги:   
+		- Изображение   
+		- Идентификатор книги (маленьким шрифтом под изображением)   
+		- Название книги   
+		- Автор   
+		- Жанр   
+		- Год издания   
+		- Издательство   
+		- Описание сюжета   
+		- Цена   
+		- Отзывы   
+Страница ошибок:   
+	404   
+	500   
+Навигация через таббар или кнопки назад на главную страницу   
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+Фильтрация   
+	Все книги   
+		- По названию   
+		- По жанру   
+		- По автору   
+		- По году издания   
+		- По цене   
+Сортировка   
+	Все книги   
+		- По названию   
+		- По жанру   
+		- По автору   
+		- По году издания   
+		- По цене   
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
 
-## Learn More
+Список API:     
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+Эндпоинт: /get_books   
+Возвращает список всех книг для нужной  страницы, дополнительные параметры определяют фильтрацию и сортировку   
+Http метод: GET   
+Параметры:   
+	page: number   
+	category: Category | undefined   
+	countPerPage: number | undefined   
+	orderBy: SortingKey | undefined   
+	filters: Filters | undefined   
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+Эндпоинт: /add_book   
+Добавление новой книги   
+Http метод: POST   
+Параметры: Все параметры, описывающие добавляемый объект   
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+Эндпоинт: /update_book/:id   
+Обновление полей уже существующей книги по id   
+Http метод: PATCH   
+Параметры:   
+	- Изображение   
+	- Год издания   
+	- Издательство   
+	- Описание сюжета   
+	- Цена   
 
-## How do I deploy this?
+Эндпоинт: /get_book/:id   
+Возвращает книгу по id   
+Http метод: GET   
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+Эндпоинт: /remove_book/:id   
+Удаляет книгу по id   
+Http метод: DELETE   
+
+Эндпоинт: /get_validation_schema   
+Нужно, чтобы тянуть с сервера схему, в соотвтествии с которой мы будем валидировать формы добавления и обновления продукта   
+Http метод: GET   
+Параметры:   
+	category: Category   
